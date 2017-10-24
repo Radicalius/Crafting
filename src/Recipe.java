@@ -3,6 +3,6 @@
  */
 public abstract class Recipe {
 
-    String rep;
+    String[] rep;
     public abstract Item exec(String table);
 }

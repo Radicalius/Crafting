@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -14,10 +15,11 @@ public class Crafting {
 
     public static void main(String[] args){
         vars.put("+",new Item("wood"));
+        vars.put(" ",new Item(""));
 
         System.out.println("Crafting Interpreter Version 1.0.0");
         System.out.println("Type h for help and q to quit\n");
-        System.out.println(recipes.get("xxx x  x "));
+        System.out.println("Loaded "+recipes.size()+" recipes");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -36,15 +38,34 @@ public class Crafting {
                     if (vars.containsKey(inp)) {
                         System.out.println(vars.get(inp));
                     } else if (inp.length() >= 3) {
-                        table += inp;
-                        if (table.length() < 9) {
+                        table += inp+"\n";
+                        if (table.length() < 12) {
                             ps = "- ";
                         }else{
-                            Recipe r = recipes.get(table);
-                            if (r != null){
-                                System.out.println(r.exec(table));
-                            }else{
-                                System.out.println("Error line "+(lc-2)+": invalid recipe");
+                            try {
+                                String[] tab = new String[9];
+                                String[] g = table.split("\n");
+                                for (int i = 0; i < 3; i++) {
+                                    for (int j = 0; j < 3; j++) {
+                                        String chari = Character.toString(g[i].charAt(j));
+                                        if (!vars.containsKey(chari)) {
+                                            throw new Exception(chari);
+                                        }
+                                        tab[i*3+j] = vars.get(chari).toString();
+                                    }
+                                }
+                                Recipe r = recipes.get(tab);
+                                if (r != null) {
+                                    if (g[1].length() == 4){
+                                        vars.put(Character.toString(g[1].charAt(3)), r.exec(table));
+                                    }else {
+                                        System.out.println(r.exec(table));
+                                    }
+                                } else {
+                                    System.out.println("Error line " + (lc - 2) + ": invalid recipe");
+                                }
+                            } catch (Exception e){
+                                System.out.println("Error line "+lc+": unrecognized symbol in recipe"+e);
                             }
                             ps = "> ";
                             table = "";
