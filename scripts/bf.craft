@@ -1,0 +1,55 @@
+%Brainfuck Implementation in Crafting
+
+%Get some sticks
++
++  /
+
+
+%Make a pickaxe
++++
+ / p
+ /
+
+%Mine Cobblestone
+s
+ p x
+
+
+%Craft Furnace
+xxx
+x xf
+xxx
+
+%Craft Charcoal
++
+ f ~
+
+
+%Craft Torch (used for output)
+~
+/  t
+
+
+%Craft Button (used for input)
+
+ + b
+
+%Craft Switch (for logic)
+
+ / s
+xxx
+
+%Make a hoe
+ ++
+ / h
+ /
+
+%Grow some sugarcane
+  ;
+ h ?
+
+%Make papyrus (this will be the program counter)
+
+???P
+
+%Craft a book

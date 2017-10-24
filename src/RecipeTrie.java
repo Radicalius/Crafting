@@ -39,6 +39,61 @@ public class RecipeTrie extends Trie {
         }
     }
 
+    static class Cobblestone extends Recipe {
+        public Cobblestone(){
+            rep = new String[] {"stone","","","","pickaxe","","","",""};
+        }
+        public Item exec(String table){
+            return new Item("cobblestone");
+        }
+    }
+
+    static class Furnace extends Recipe {
+        public Furnace(){
+            rep = new String[] {"cobblestone","cobblestone","cobblestone","cobblestone","","cobblestone","cobblestone","cobblestone","cobblestone"};
+        }
+        public Item exec(String table){
+            return new Item("furnace");
+        }
+    }
+
+    static class Charcoal extends Recipe {
+        public Charcoal(){
+            rep = new String[] {"wood","","","","furnace","","","",""};
+        }
+
+        public Item exec(String table) {
+            return new Item("charcoal");
+        }
+    }
+
+    static class Switch extends Recipe {
+        public Switch(){
+            rep = new String[] {"","","","","stick","","cobblestone","cobblestone","cobblestone"};
+        }
+        public Item exec(String table){
+            return new Item("switch");
+        }
+    }
+
+    static class Torch extends Recipe{
+        public Torch(){
+            rep = new String[] {"charcoal","","","stick","","","","",""};
+        }
+        public Item exec(String table){
+            return new Item("torch");
+        }
+    }
+
+    static class Button extends Recipe{
+        public Button(){
+            rep = new String[] {"","","","","wood","","","",""};
+        }
+        public Item exec(String table){
+            return new Item("button");
+        }
+    }
+
     public RecipeTrie(){
         super();
 
@@ -53,5 +108,23 @@ public class RecipeTrie extends Trie {
 
         Hoe h = new Hoe();
         put(h);
+
+        Cobblestone cs = new Cobblestone();
+        put(cs);
+
+        Furnace f = new Furnace();
+        put(f);
+
+        Charcoal c = new Charcoal();
+        put(c);
+
+        Torch t = new Torch();
+        put(t);
+
+        Switch sw = new Switch();
+        put(sw);
+
+        Button b = new Button();
+        put(b);
     }
 }
